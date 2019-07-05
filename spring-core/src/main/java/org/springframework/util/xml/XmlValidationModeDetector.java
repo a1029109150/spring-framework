@@ -82,6 +82,7 @@ public class XmlValidationModeDetector {
 	 * @see #VALIDATION_XSD
 	 */
 	public int detectValidationMode(InputStream inputStream) throws IOException {
+		//by me此方法循环中,consumeCommentTokens方法排除注释,hasDoctype判断是否为DTD模式,hasOpeningTag在排除不是DTD之后,判断是否为XSD
 		// Peek into the file to look for DOCTYPE.
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		try {
@@ -138,7 +139,7 @@ public class XmlValidationModeDetector {
 		int openTagIndex = content.indexOf('<');
 		return (openTagIndex > -1 // < 存在
                 && (content.length() > openTagIndex + 1) // < 后面还有内容
-                && Character.isLetter(content.charAt(openTagIndex + 1))); // < 后面的内容是字幕
+                && Character.isLetter(content.charAt(openTagIndex + 1))); // < 后面的内容是字母
 	}
 
 	/**
